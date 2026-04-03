@@ -30,15 +30,27 @@ async function proxyFetch(targetUrl, options = {}) {
   return res.json();
 }
 
-// Lokale plantypes die vigerend kunnen zijn voor een vergunningtoets
-const VIGERENDE_PLANTYPES = [
+// Lokale plantypes relevant voor een vergunningtoets (nooit provinciaal/nationaal)
+const LOKALE_PLANTYPES = [
   'bestemmingsplan',
   'omgevingsplan',
-  'TAM-omgevingsplan',
+  'tam-omgevingsplan',
   'beheersverordening',
   'wijzigingsplan',
   'uitwerkingsplan',
   'inpassingsplan',
+  'structuurvisie',
+];
+
+// Plantypes die altijd worden uitgefilterd (provinciaal / nationaal)
+const UITGESLOTEN_PLANTYPES = [
+  'omgevingsverordening',
+  'tam-omgevingsverordening',
+  'provinciale verordening',
+  'amvb',
+  'regeling',
+  'rijksstructuurvisie',
+  'omgevingsvisie',
 ];
 
 // Planstatussen die als vigerend (van kracht) worden beschouwd
@@ -63,33 +75,28 @@ export async function zoekPlannenOpLocatie(lon, lat) {
   const data = await proxyFetch(url, { method: 'POST', body });
   const alle = data?._embedded?.plannen ?? [];
 
-  // Stap 2: filter op vigerende lokale plantypes
-  const vigerend = alle.filter(p => {
-    const type    = (p.type ?? '').toLowerCase();
-    const status  = (p.planstatusInfo?.planstatus ?? '').toLowerCase();
-    const isLokaal   = VIGERENDE_PLANTYPES.some(t => t.toLowerCase() === type);
-    const isVigerend = VIGERENDE_STATUSSEN.some(s => s.toLowerCase() === status);
-    return isLokaal && isVigerend;
+  // Stap 2: gooi provinciale/nationale plannen er altijd uit
+  const lokaal = alle.filter(p => {
+    const type = (p.type ?? '').toLowerCase();
+    return !UITGESLOTEN_PLANTYPES.includes(type);
   });
 
-  // Stap 3: sorteer op datum (nieuwste eerst)
-  vigerend.sort((a, b) => {
-    const da = a.planstatusInfo?.datum ?? '';
-    const db = b.planstatusInfo?.datum ?? '';
-    return db.localeCompare(da);
+  // Stap 3: filter op vigerende status + lokale plantypes
+  const vigerend = lokaal.filter(p => {
+    const type   = (p.type ?? '').toLowerCase();
+    const status = (p.planstatusInfo?.planstatus ?? '').toLowerCase();
+    return LOKALE_PLANTYPES.includes(type) &&
+           VIGERENDE_STATUSSEN.includes(status);
   });
 
-  // Stap 4: als er geen vigerende lokale plannen zijn, geef overige terug als fallback
-  // (inclusief ontwerp-plannen en provinciale plannen) zodat de gebruiker iets ziet
-  if (!vigerend.length) {
-    return alle.sort((a, b) => {
-      const da = a.planstatusInfo?.datum ?? '';
-      const db = b.planstatusInfo?.datum ?? '';
-      return db.localeCompare(da);
-    });
-  }
+  // Stap 4: sorteer op datum (nieuwste eerst)
+  const sorteerOpDatum = arr => arr.sort((a, b) =>
+    (b.planstatusInfo?.datum ?? '').localeCompare(a.planstatusInfo?.datum ?? '')
+  );
 
-  return vigerend;
+  // Stap 5: vigerende plannen teruggeven; als die er niet zijn alleen lokale
+  // (bijv. ontwerp-plannen), maar nooit provinciale
+  return sorteerOpDatum(vigerend.length ? vigerend : lokaal);
 }
 
 /**
