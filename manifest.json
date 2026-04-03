@@ -1,0 +1,43 @@
+{
+  "name": "AI Plantoetser",
+  "short_name": "Plantoetser",
+  "description": "Perceel-specifieke planregeltoets voor omgevingsvergunningen",
+  "start_url": "./index.html",
+  "id": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f4f0",
+  "theme_color": "#01696f",
+  "orientation": "any",
+  "lang": "nl",
+  "dir": "ltr",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Adres zoeken",
+      "short_name": "Zoeken",
+      "url": "./index.html#zoeken",
+      "description": "Snel een adres raadplegen"
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "url": "./index.html#dashboard"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "screenshots": []
+}

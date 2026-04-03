@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+  <!-- Perceel / kaartspeld basis -->
+  <path d="M16 2C11.582 2 8 5.582 8 10c0 6.627 8 18 8 18s8-11.373 8-18c0-4.418-3.582-8-8-8z" fill="currentColor" opacity="0.15"/>
+  <path d="M16 2C11.582 2 8 5.582 8 10c0 6.627 8 18 8 18s8-11.373 8-18c0-4.418-3.582-8-8-8z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+  <!-- Vinkje binnenin -->
+  <path d="M12.5 10l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

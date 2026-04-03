@@ -1,0 +1,614 @@
+[
+  {
+    "activiteit": "technische-bouwactiviteit",
+    "label": "Technische bouwactiviteit",
+    "vereisten": [
+      {
+        "id": "TBA-01",
+        "omschrijving": "Situatietekening schaal 1:500 of 1:1000",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 1 sub a",
+        "toelichting": "Geef de bestaande en nieuwe situatie aan met maten ten opzichte van de perceelgrenzen en de weg. Toon de ligging van het bouwperceel, naastgelegen percelen en het bestaande en voorgenomen bouwwerk.",
+        "condities": null
+      },
+      {
+        "id": "TBA-02",
+        "omschrijving": "Tekeningen van plattegronden, gevelaanzichten en doorsneden (schaal 1:100)",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 1 sub b",
+        "toelichting": "Alle verdiepingen, kap, alle gevels en minimaal één dwarsdoorsnede. Geef maatvoering op (hoogte, breedte, diepte, dakhellingen, vloer- en goothoogten).",
+        "condities": null
+      },
+      {
+        "id": "TBA-03",
+        "omschrijving": "Constructieberekeningen en -tekeningen",
+        "type": "verplicht",
+        "grondslag": "Bbl art. 2.4 / Bkl art. 7.4 lid 1 sub c",
+        "toelichting": "Constructieve uitwerking door erkend constructeur. Inclusief fundering, vloer, wanden en dak.",
+        "condities": null
+      },
+      {
+        "id": "TBA-04",
+        "omschrijving": "Berekening energieprestatie (BENG)",
+        "type": "verplicht",
+        "grondslag": "Bbl art. 5.1 / Bkl art. 7.4 lid 1 sub d",
+        "toelichting": "BENG-indicatoren: maximale energiebehoefte, maximaal primair fossiel energiegebruik en minimaal aandeel hernieuwbare energie.",
+        "condities": null
+      },
+      {
+        "id": "TBA-05",
+        "omschrijving": "Opgave van gebruikte bouwmaterialen",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 1 sub e",
+        "toelichting": "Specificeer gevelmaterialen, dakbedekking, isolatiematerialen. Gebruik milieuprestatie (MPG) indien woning of utiliteitsgebouw >100m².",
+        "condities": null
+      },
+      {
+        "id": "TBA-06",
+        "omschrijving": "Veiligheidsplan (sloopmelding bij sloopwerkzaamheden)",
+        "type": "conditioneel",
+        "grondslag": "Bbl art. 7.10 / Bkl art. 7.6",
+        "toelichting": "Alleen vereist als er sloopwerkzaamheden deel uitmaken van de bouwactiviteit.",
+        "condities": "Bij sloop van meer dan 10 m³ bouwafval of aanwezigheid van asbest"
+      },
+      {
+        "id": "TBA-07",
+        "omschrijving": "Asbestinventarisatierapport",
+        "type": "conditioneel",
+        "grondslag": "Bbl art. 7.10 lid 4",
+        "toelichting": "Verplicht bij sloop van bouwwerken van vóór 1994. Rapport dient opgesteld te zijn door een gecertificeerd bedrijf (SC-540).",
+        "condities": "Bij bouwjaar voor 1994 en aanwezige sloopwerkzaamheden"
+      },
+      {
+        "id": "TBA-08",
+        "omschrijving": "Bodemonderzoek (verkennend of nader)",
+        "type": "conditioneel",
+        "grondslag": "Bkl art. 5.89 / Bbl art. 4.1",
+        "toelichting": "Vereist bij nieuwbouw of verbouwing waarbij de bodem wordt geroerd, tenzij de locatie eerder is onderzocht en vrij van bodemverontreiniging.",
+        "condities": "Bij bodemingrepen en bij aanleg fundering"
+      },
+      {
+        "id": "TBA-09",
+        "omschrijving": "Berekening daglicht (EPC / spuiventilatie)",
+        "type": "aandachtspunt",
+        "grondslag": "Bbl art. 4.10",
+        "toelichting": "Controleer of het bouwwerk voldoet aan de daglichttoetreding conform NEN 2057.",
+        "condities": null
+      }
+    ]
+  },
+  {
+    "activiteit": "omgevingsplanactiviteit",
+    "label": "Omgevingsplanactiviteit (OPA)",
+    "vereisten": [
+      {
+        "id": "OPA-01",
+        "omschrijving": "Motivering overeenstemming met omgevingsplan",
+        "type": "verplicht",
+        "grondslag": "Ow art. 5.7 / Bkl art. 7.3",
+        "toelichting": "Onderbouw dat de aangevraagde activiteit past binnen de regels van het geldende omgevingsplan (bestemmingsplan / TAM-omgevingsplan).",
+        "condities": null
+      },
+      {
+        "id": "OPA-02",
+        "omschrijving": "Situatietekening met bestemming en aanduiding",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.3 lid 1",
+        "toelichting": "Kaartuitsnede van het geldende bestemmingsplan met het perceel aangeduid. Toon relevante bestemmingen en aanduidingen.",
+        "condities": null
+      },
+      {
+        "id": "OPA-03",
+        "omschrijving": "Beschrijving van de activiteit",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.3 lid 2",
+        "toelichting": "Omschrijf de aard en omvang van de activiteit, de beoogde gebruikswijze en de duur van de activiteit.",
+        "condities": null
+      },
+      {
+        "id": "OPA-04",
+        "omschrijving": "Parkeerbalans",
+        "type": "conditioneel",
+        "grondslag": "Omgevingsplan art. parkeren",
+        "toelichting": "Indien het omgevingsplan parkeernormen bevat: toon aan dat voldaan wordt aan de parkeerbehoefte.",
+        "condities": "Bij functiewijziging of nieuwe bebouwing met parkeereis"
+      },
+      {
+        "id": "OPA-05",
+        "omschrijving": "Beeldkwaliteitsplan of welstandsadvies",
+        "type": "conditioneel",
+        "grondslag": "Omgevingsplan / gemeentelijk welstandsbeleid",
+        "toelichting": "Indien de gemeente beeldkwaliteitseisen hanteert of het bouwplan aan de welstandscommissie moet worden voorgelegd.",
+        "condities": "In welstandsgevoelig gebied of bij beschermd stadsgezicht"
+      },
+      {
+        "id": "OPA-06",
+        "omschrijving": "Omgevingsdialoogverslag",
+        "type": "aandachtspunt",
+        "grondslag": "Bkl art. 7.3 lid 3",
+        "toelichting": "Overweeg vroegtijdig overleg met omwonenden en andere belanghebbenden. Verslag van de omgevingsdialoog kan onderdeel zijn van de aanvraag.",
+        "condities": null
+      }
+    ]
+  },
+  {
+    "activiteit": "bopa",
+    "label": "Afwijken omgevingsplan (BOPA)",
+    "vereisten": [
+      {
+        "id": "BOPA-01",
+        "omschrijving": "Ruimtelijke onderbouwing",
+        "type": "verplicht",
+        "grondslag": "Ow art. 8.0a / Bkl art. 8.0",
+        "toelichting": "Uitgebreide motivering waarom de afwijking aanvaardbaar is. Onderbouw: goede ruimtelijke ordening, passend in de omgeving, geen onevenredige hinder voor omgeving.",
+        "condities": null
+      },
+      {
+        "id": "BOPA-02",
+        "omschrijving": "Overzicht strijdige regels en motivering afwijking",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 8.0 lid 1",
+        "toelichting": "Specificeer welke regels van het omgevingsplan worden overschreden en motiveer per regel waarom de afwijking acceptabel is.",
+        "condities": null
+      },
+      {
+        "id": "BOPA-03",
+        "omschrijving": "Milieuonderzoeken (geluid, lucht, bodem, externe veiligheid)",
+        "type": "conditioneel",
+        "grondslag": "Ow / Bkl afdelingen 5.1-5.4",
+        "toelichting": "Afhankelijk van de locatie en het type activiteit kunnen diverse milieuonderzoeken vereist zijn.",
+        "condities": "Bij ligging in geluidszone, nabij risicovolle inrichting of bodemgevoelig gebruik"
+      },
+      {
+        "id": "BOPA-04",
+        "omschrijving": "Stedenbouwkundige toets / advies",
+        "type": "verplicht",
+        "grondslag": "Ow art. 8.0a lid 2",
+        "toelichting": "Advisering door stedenbouwkundig medewerker of extern stedenbouwkundige over de ruimtelijke inpassing.",
+        "condities": null
+      },
+      {
+        "id": "BOPA-05",
+        "omschrijving": "Flora- en faunaonderzoek",
+        "type": "conditioneel",
+        "grondslag": "Ow art. 11.1 (Wnb)",
+        "toelichting": "Vereist als de activiteit invloed kan hebben op beschermde soorten of gebieden (Natura 2000, NNN).",
+        "condities": "Bij sloop van gebouwen, kap van bomen of ingreep in natuur"
+      },
+      {
+        "id": "BOPA-06",
+        "omschrijving": "Archeologisch onderzoek",
+        "type": "conditioneel",
+        "grondslag": "Ow art. 8.1 (erfgoedwet)",
+        "toelichting": "Verplicht in archeologisch verwachtingsgebied bij bodemingrepen > plandrempelwaarde.",
+        "condities": "In gebieden met archeologische verwachting"
+      },
+      {
+        "id": "BOPA-07",
+        "omschrijving": "Wateradvies Waterschap",
+        "type": "conditioneel",
+        "grondslag": "Ow / Watertoets",
+        "toelichting": "Watertoets verplicht bij omgevingsplanwijziging. Overleg met het waterschap over afvoer, infiltratie en waterberging.",
+        "condities": "Bij toename verhard oppervlak > 2000m² of ingreep in waterhuishouding"
+      },
+      {
+        "id": "BOPA-08",
+        "omschrijving": "Verklaring geen bezwaar (provinciaal belang)",
+        "type": "conditioneel",
+        "grondslag": "Ow art. 16.21",
+        "toelichting": "Indien de activiteit in strijd is met provinciaal belang of instructieregels is vooraf afstemming met de provincie vereist.",
+        "condities": "Bij strijd met provinciale omgevingsvisie of -verordening"
+      }
+    ]
+  },
+  {
+    "activiteit": "slopen",
+    "label": "Slopen",
+    "vereisten": [
+      {
+        "id": "SLO-01",
+        "omschrijving": "Sloopmelding of sloopvergunning",
+        "type": "verplicht",
+        "grondslag": "Bbl art. 7.10 / Ow art. 2.12",
+        "toelichting": "Minimaal 4 weken voor aanvang van de sloopwerkzaamheden indienen. Bij monumenten is een aparte vergunning vereist.",
+        "condities": null
+      },
+      {
+        "id": "SLO-02",
+        "omschrijving": "Asbestinventarisatierapport (type A of type B)",
+        "type": "verplicht",
+        "grondslag": "Bbl art. 7.10 lid 4 / Arbobesluit",
+        "toelichting": "Verplicht voor bouwwerken van voor 1994. Het rapport wordt opgesteld door een gecertificeerd inventarisatiebedrijf (SC-540 of gelijkwaardig).",
+        "condities": null
+      },
+      {
+        "id": "SLO-03",
+        "omschrijving": "Sloopveiligheidsplan",
+        "type": "verplicht",
+        "grondslag": "Bbl art. 7.11",
+        "toelichting": "Plan voor veilige uitvoering van de sloopwerkzaamheden. Dient te bevatten: fasering, bereikbaarheid, afzettingen en maatregelen voor aangrenzende gebouwen.",
+        "condities": null
+      },
+      {
+        "id": "SLO-04",
+        "omschrijving": "Opgave van sloopafval (type en hoeveelheid)",
+        "type": "verplicht",
+        "grondslag": "Bbl art. 7.12 / Lbv-plus art. 3.85",
+        "toelichting": "Inventariseer vrijkomende materiaalstromen. Toon aan dat scheiding en hergebruik maximaal wordt benut (circulariteit).",
+        "condities": null
+      },
+      {
+        "id": "SLO-05",
+        "omschrijving": "Constructieve beoordeling aangrenzende gebouwen",
+        "type": "conditioneel",
+        "grondslag": "Bbl art. 2.4 / CUR 166",
+        "toelichting": "Bij sloop van aaneengebouwde panden of bij gevaar voor instabiliteit aangrenzend gebouw.",
+        "condities": "Bij aaneen- of naastgelegen bebouwing"
+      },
+      {
+        "id": "SLO-06",
+        "omschrijving": "Ecologisch onderzoek (vogels, vleermuizen)",
+        "type": "conditioneel",
+        "grondslag": "Ow art. 11.1 / Wnb",
+        "toelichting": "Bij sloop van gebouwen met mogelijke verblijfplaatsen van beschermde soorten (vleermuizen, gierzwaluwen, huismussen).",
+        "condities": "Bij sloop van gebouwen in of nabij stedelijk groen"
+      },
+      {
+        "id": "SLO-07",
+        "omschrijving": "Sloopbegeleiding door deskundige",
+        "type": "aandachtspunt",
+        "grondslag": "Bbl art. 7.10 lid 5",
+        "toelichting": "Overweeg sloopbegeleiding door erkend sloopbedrijf met gecertificeerd personeel bij grootschalige sloop of aanwezigheid van gevaarlijke stoffen.",
+        "condities": null
+      }
+    ]
+  },
+  {
+    "activiteit": "gemeentelijk-monument",
+    "label": "Gemeentelijk monument",
+    "vereisten": [
+      {
+        "id": "GMO-01",
+        "omschrijving": "Aanvraagformulier omgevingsvergunning monument",
+        "type": "verplicht",
+        "grondslag": "Ow art. 2.1 lid 1 sub b / gemeentelijke erfgoedverordening",
+        "toelichting": "Aparte aanvraag (of aanvullend onderdeel) specifiek voor het monumentenaspect.",
+        "condities": null
+      },
+      {
+        "id": "GMO-02",
+        "omschrijving": "Beschrijving van de ingreep",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 2",
+        "toelichting": "Gedetailleerde omschrijving van de aard, omvang en methode van de ingreep. Onderscheid bestaande en nieuwe situatie.",
+        "condities": null
+      },
+      {
+        "id": "GMO-03",
+        "omschrijving": "Foto's van bestaande situatie (exterieur en interieur)",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 2 sub b",
+        "toelichting": "Minimum: alle gevels exterieur, alle ruimten interieur, detailfoto's aangetaste of te wijzigen onderdelen.",
+        "condities": null
+      },
+      {
+        "id": "GMO-04",
+        "omschrijving": "Advies gemeentelijke monumentencommissie / erfgoedcommissie",
+        "type": "verplicht",
+        "grondslag": "Gemeentelijke erfgoedverordening",
+        "toelichting": "Vooraf advisering aanvragen bij de gemeentelijke erfgoedcommissie (of welstandscommissie met erfgoedtaak).",
+        "condities": null
+      },
+      {
+        "id": "GMO-05",
+        "omschrijving": "Materiaalspecificatie en kleursamenstelling",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 2 sub c",
+        "toelichting": "Specificeer te gebruiken materialen, kleuren en afwerkingen. Gebruik bij voorkeur historisch authentieke materialen.",
+        "condities": null
+      },
+      {
+        "id": "GMO-06",
+        "omschrijving": "Bouwhistorisch onderzoek",
+        "type": "conditioneel",
+        "grondslag": "Erfgoedwet art. 4.2",
+        "toelichting": "Verplicht bij ingrijpende wijzigingen of bij onduidelijkheid over bouwhistorische waarden van het pand.",
+        "condities": "Bij ingrijpende wijzigingen of onbekende bouwhistorie"
+      },
+      {
+        "id": "GMO-07",
+        "omschrijving": "Energieadvies met monumentenvariant",
+        "type": "aandachtspunt",
+        "grondslag": "Bbl art. 5.1 / RVO handreiking energiebesparing monumenten",
+        "toelichting": "Monumenten zijn vrijgesteld van BENG maar verduurzaming is wenselijk. Gebruik de RVO-handreiking 'Energiebesparing in monumenten'.",
+        "condities": null
+      }
+    ]
+  },
+  {
+    "activiteit": "rijksmonument",
+    "label": "Rijksmonument",
+    "vereisten": [
+      {
+        "id": "RMO-01",
+        "omschrijving": "Aanvraag omgevingsvergunning rijksmonumentactiviteit",
+        "type": "verplicht",
+        "grondslag": "Ow art. 2.1 lid 1 sub b / erfgoedwet",
+        "toelichting": "Afzonderlijk vergunningsttraject voor rijksmonumenten. Het bevoegd gezag is de gemeente; advies van RCE is verplicht bij categorie-1 monumenten.",
+        "condities": null
+      },
+      {
+        "id": "RMO-02",
+        "omschrijving": "Bouwhistorisch rapport",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 3 / RCE-richtlijn",
+        "toelichting": "Opgesteld door een bouwhistoricus. Beschrijft de bouwhistorische waarden van het gebouw en de invloed van de ingreep hierop.",
+        "condities": null
+      },
+      {
+        "id": "RMO-03",
+        "omschrijving": "Advies Rijksdienst voor het Cultureel Erfgoed (RCE)",
+        "type": "verplicht",
+        "grondslag": "Ow art. 4.19 / Bkl art. 4.19",
+        "toelichting": "Wettelijk adviesrecht voor rijksmonumenten. RCE adviseert binnen 8 weken. Het bevoegd gezag moet het advies zwaarwegend meenemen.",
+        "condities": null
+      },
+      {
+        "id": "RMO-04",
+        "omschrijving": "Kleur- en materiaalplan",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 3 sub d",
+        "toelichting": "Gedetailleerde beschrijving van te gebruiken materialen, kleuren, oppervlaktebehandelingen en verwerkingstechnieken.",
+        "condities": null
+      },
+      {
+        "id": "RMO-05",
+        "omschrijving": "Foto-documentatie bestaande situatie",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 7.4 lid 3 sub b",
+        "toelichting": "Uitgebreide fotoreportage van alle te wijzigen onderdelen. Zowel overzichts- als detailopnamen.",
+        "condities": null
+      },
+      {
+        "id": "RMO-06",
+        "omschrijving": "Restauratieplan opgesteld door gespecialiseerd bureau",
+        "type": "verplicht",
+        "grondslag": "Erfgoedwet / SIKB-richtlijnen",
+        "toelichting": "Plan voor restauratie/consolidatie met aandacht voor authenticiteit, reversibiliteit en duurzaamheid van de ingreep.",
+        "condities": null
+      },
+      {
+        "id": "RMO-07",
+        "omschrijving": "Nazorgplan / beheer- en onderhoudsplan",
+        "type": "aandachtspunt",
+        "grondslag": "Erfgoedwet art. 11.1",
+        "toelichting": "Overweeg een meerjarig beheer- en onderhoudsplan voor het monument. Subsidie beschikbaar via RCE (ISE-regeling).",
+        "condities": null
+      }
+    ]
+  },
+  {
+    "activiteit": "milieu",
+    "label": "Milieubelastende activiteit",
+    "vereisten": [
+      {
+        "id": "MIL-01",
+        "omschrijving": "Milieueffectbeoordeling of M.e.r.-aanmeldnotitie",
+        "type": "conditioneel",
+        "grondslag": "Ow art. 16.43 / Bkl bijlage V",
+        "toelichting": "Verplicht voor activiteiten in de m.e.r.-drempellijst. Aanmeldnotitie bij (mogelijk) significante milieueffecten.",
+        "condities": "Bij activiteiten boven m.e.r.-drempelwaarden"
+      },
+      {
+        "id": "MIL-02",
+        "omschrijving": "Beschrijving van de milieubelastende activiteit",
+        "type": "verplicht",
+        "grondslag": "Bkl art. 2.26 / Lbv-plus afd. 3",
+        "toelichting": "Omschrijf het type bedrijf, de activiteiten, gebruikte stoffen, emissies, opslag en energieverbruik.",
+        "condities": null
+      },
+      {
+        "id": "MIL-03",
+        "omschrijving": "Akoestisch onderzoek (geluid)",
+        "type": "conditioneel",
+        "grondslag": "Bkl afd. 5.1 / Wet geluidhinder",
+        "toelichting": "Geluidsonderzoek vereist bij activiteiten die een geluidbijdrage leveren op woningen of andere geluidgevoelige bestemmingen.",
+        "condities": "Bij bedrijfsactiviteiten met installaties, verkeer of productiegeluid"
+      },
+      {
+        "id": "MIL-04",
+        "omschrijving": "Externe veiligheidsonderzoek (EV)",
+        "type": "conditioneel",
+        "grondslag": "Bkl afd. 5.2 / Bevi",
+        "toelichting": "Verplicht bij opslag of gebruik van gevaarlijke stoffen boven de drempelwaarden van het Besluit externe veiligheid inrichtingen.",
+        "condities": "Bij aanwezigheid van gevaarlijke stoffen"
+      },
+      {
+        "id": "MIL-05",
+        "omschrijving": "Luchtkwaliteitsonderzoek (NSL / SRM)",
+        "type": "conditioneel",
+        "grondslag": "Bkl afd. 5.3 / Regeling beoordeling luchtkwaliteit",
+        "toelichting": "Toetsing aan grenswaarden voor NO2, PM10 en PM2.5.",
+        "condities": "Bij significante bijdrage aan luchtemissies"
+      },
+      {
+        "id": "MIL-06",
+        "omschrijving": "Activiteitenrapportage lozen / infiltreren",
+        "type": "conditioneel",
+        "grondslag": "Bkl afd. 6.3 / Waterwet",
+        "toelichting": "Bij lozing van afvalwater anders dan huishoudelijk afvalwater is melding of vergunning bij waterschap vereist.",
+        "condities": "Bij proceswater, koelwater of bijzondere afvalwaterstromen"
+      },
+      {
+        "id": "MIL-07",
+        "omschrijving": "Geur- en trillingsonderzoek",
+        "type": "conditioneel",
+        "grondslag": "Bkl afd. 5.4",
+        "toelichting": "Afhankelijk van het type bedrijfsactiviteit.",
+        "condities": "Bij bedrijven met geuremissies of trillingsgenererende installaties"
+      },
+      {
+        "id": "MIL-08",
+        "omschrijving": "Bodemrisicodocument",
+        "type": "aandachtspunt",
+        "grondslag": "Bkl afd. 6.1",
+        "toelichting": "Overweeg een bodembeheerplan als bodembeschermende activiteiten worden uitgevoerd.",
+        "condities": null
+      }
+    ]
+  },
+  {
+    "activiteit": "uitweg",
+    "label": "Uitweg / uitrit",
+    "vereisten": [
+      {
+        "id": "UIT-01",
+        "omschrijving": "Tekening met ligging, afmetingen en aansluiting uitweg",
+        "type": "verplicht",
+        "grondslag": "Omgevingsplan / APV uitweg",
+        "toelichting": "Toon de ligging ten opzichte van het perceel en de weg, breedte van de inrit (gemeente-eis vaak max. 6m), zichthoeken.",
+        "condities": null
+      },
+      {
+        "id": "UIT-02",
+        "omschrijving": "Overzicht verkeersveiligheid (zichtdriehoek)",
+        "type": "verplicht",
+        "grondslag": "CROW publicatie 723 / ASVV",
+        "toelichting": "Aantonen dat de zichtdriehoek vrij is conform CROW-richtlijnen voor de betreffende wegcategorie en snelheidslimiet.",
+        "condities": null
+      },
+      {
+        "id": "UIT-03",
+        "omschrijving": "Aanvraag aansluiting nuts/riool (indien nodig)",
+        "type": "conditioneel",
+        "grondslag": "Gemeentelijke rioleringsverordening",
+        "toelichting": "Bij aanleg van een nieuwe uitweg waarbij riolering, drainage of straatwerk moet worden aangepast.",
+        "condities": "Bij aanpassing van gemeentelijke infrastructuur"
+      },
+      {
+        "id": "UIT-04",
+        "omschrijving": "Advies Omgevingsdienst / gemeente-ingenieur",
+        "type": "conditioneel",
+        "grondslag": "Gemeentelijke APV",
+        "toelichting": "Bij uitwegen op drukke wegen of bij twijfel over de verkeersveiligheid.",
+        "condities": "Bij aansluiting op provinciale of drukke gemeentelijke wegen"
+      },
+      {
+        "id": "UIT-05",
+        "omschrijving": "Waterpassering / berekeningsinfiltratie",
+        "type": "aandachtspunt",
+        "grondslag": "Gemeentelijk waterplan",
+        "toelichting": "Bij aanleg van verhard oppervlak: overweeg waterpasserende verharding of infiltratievoorziening.",
+        "condities": null
+      }
+    ]
+  },
+  {
+    "activiteit": "kap",
+    "label": "Kap",
+    "vereisten": [
+      {
+        "id": "KAP-01",
+        "omschrijving": "Kapmelding of omgevingsvergunning kap",
+        "type": "verplicht",
+        "grondslag": "Ow / omgevingsplan kapverordening",
+        "toelichting": "Verplicht voor houtopstanden met een stamomtrek > drempelwaarde (vaak 31 cm op 1,30m hoogte). Controleer gemeentelijke bomenverordening.",
+        "condities": null
+      },
+      {
+        "id": "KAP-02",
+        "omschrijving": "Opgave soort, locatie en afmetingen boom",
+        "type": "verplicht",
+        "grondslag": "Gemeentelijke kapverordening",
+        "toelichting": "Geef per boom: boomsoort, stamomtrek, hoogte, leeftijd (indien bekend), locatie op tekening.",
+        "condities": null
+      },
+      {
+        "id": "KAP-03",
+        "omschrijving": "Motivering noodzaak kap",
+        "type": "verplicht",
+        "grondslag": "Gemeentelijke kapverordening",
+        "toelichting": "Beschrijf de reden voor kap: bouw, veiligheid, ziekte/aantasting, overlast. Bijvoegen: boomtechnisch rapport bij ziekte of aantasting.",
+        "condities": null
+      },
+      {
+        "id": "KAP-04",
+        "omschrijving": "Herplantplan of compensatie",
+        "type": "conditioneel",
+        "grondslag": "Omgevingsplan herplantplicht",
+        "toelichting": "Veel gemeenten stellen als voorwaarde dat gekapte bomen worden herplant (herplantplicht). Geef aan waar en welke soort.",
+        "condities": "Bij gemeenten met herplantplicht in de kapverordening"
+      },
+      {
+        "id": "KAP-05",
+        "omschrijving": "Boomtechnisch rapport (VTA)",
+        "type": "conditioneel",
+        "grondslag": "Bomen-APV / ISA-richtlijn",
+        "toelichting": "Visual Tree Assessment uitgevoerd door een gecertificeerd boomtherapeut/ETW. Verplicht bij kap wegens veiligheidsreden.",
+        "condities": "Bij kap wegens veiligheidsreden of twijfelachtige conditie"
+      },
+      {
+        "id": "KAP-06",
+        "omschrijving": "Ecologisch onderzoek (vleermuizen, vogelnesten)",
+        "type": "conditioneel",
+        "grondslag": "Ow art. 11.1 / Wnb",
+        "toelichting": "Bij kap in het broedseizoen (15 maart – 15 juli) of bij bomen met vleermuisverblijfplaatsen.",
+        "condities": "Bij kap in of nabij broedseizoen, of bij bomen > 40 jaar"
+      }
+    ]
+  },
+  {
+    "activiteit": "reclame",
+    "label": "Reclame",
+    "vereisten": [
+      {
+        "id": "REC-01",
+        "omschrijving": "Tekening met afmetingen en positie reclamebord",
+        "type": "verplicht",
+        "grondslag": "Omgevingsplan / welstandsnota",
+        "toelichting": "Toon op schaal: breedte, hoogte, uitsteek, hoogte onderkant bord. Geef positie op gevel of situatietekening.",
+        "condities": null
+      },
+      {
+        "id": "REC-02",
+        "omschrijving": "Beschrijving materiaal, kleur en verlichting",
+        "type": "verplicht",
+        "grondslag": "Welstandsnota / beeldkwaliteitsplan",
+        "toelichting": "Geef materiaal, kleurcodering (RAL/NCS), wijze van bevestiging en eventuele verlichting (LED, lichtbak, etc.).",
+        "condities": null
+      },
+      {
+        "id": "REC-03",
+        "omschrijving": "Visualisatie in de gevelcompositie (fotomontage)",
+        "type": "verplicht",
+        "grondslag": "Welstandsnota",
+        "toelichting": "Foto van de bestaande gevel met daarop de reclame ingetekend. Benodig voor beoordeling van de welstandscommissie.",
+        "condities": null
+      },
+      {
+        "id": "REC-04",
+        "omschrijving": "Constructieve berekening (bij grote/zware reclame-uitingen)",
+        "type": "conditioneel",
+        "grondslag": "Bbl art. 2.4",
+        "toelichting": "Bij reclameborden zwaarder dan 25kg of met een oppervlakte > 2m² is constructieve borging vereist.",
+        "condities": "Bij reclameborden > 25 kg of oppervlakte > 2 m²"
+      },
+      {
+        "id": "REC-05",
+        "omschrijving": "Advies welstandscommissie",
+        "type": "conditioneel",
+        "grondslag": "Gemeentelijk welstandsbeleid",
+        "toelichting": "In welstandsgevoelige gebieden of bij beschermd stadsgezicht is vooraf overleg met of advies van de welstandscommissie vereist.",
+        "condities": "In welstandsgevoelig gebied of beschermd stadsgezicht"
+      },
+      {
+        "id": "REC-06",
+        "omschrijving": "Reclamebeleid-check (voldoet reclame aan gemeentelijk reclamebeleid)",
+        "type": "aandachtspunt",
+        "grondslag": "Omgevingsplan reclamebepalingen",
+        "toelichting": "Controleer het gemeentelijk reclamebeleid op: maximale afmetingen, kleuren, verlichtingsregels en plaatsingsregels per zone.",
+        "condities": null
+      }
+    ]
+  }
+]

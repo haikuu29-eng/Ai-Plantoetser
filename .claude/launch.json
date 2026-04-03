@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "AI Plantoetser (Python HTTP)",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8080"],
+      "cwd": "/Users/christiankrielen/Documents/Code/Toezichtapp/ai-plantoetser",
+      "port": 8080
+    },
+    {
+      "name": "AI Plantoetser (npx serve)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "8080", "."],
+      "port": 8080
+    }
+  ]
+}

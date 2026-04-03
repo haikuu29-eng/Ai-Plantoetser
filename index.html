@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="nl" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Perceel-specifieke planregeltoets voor omgevingsvergunningen" />
+  <meta name="theme-color" content="#01696f" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1917"  media="(prefers-color-scheme: dark)" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="AI Plantoetser" />
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png" />
+
+  <!-- Title -->
+  <title>AI Plantoetser</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/views.css" />
+
+  <!-- CDN libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.0/proj4.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+
+  <style>
+    /* iOS safe-area insets */
+    .topbar {
+      padding-top: env(safe-area-inset-top);
+      height: calc(var(--topbar-height) + env(safe-area-inset-top));
+    }
+    .body-layout {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    /* Topbar scroll compensation */
+    .app-shell { padding-top: 0; }
+  </style>
+</head>
+<body>
+
+<div class="app-shell" id="app">
+
+  <!-- Offline banner -->
+  <div class="offline-banner" id="offline-banner" role="status" aria-live="polite">
+    Geen internetverbinding — eerder opgeslagen percelen zijn beschikbaar
+  </div>
+
+  <!-- Topbar -->
+  <header class="topbar" role="banner">
+    <button
+      class="topbar__hamburger"
+      id="hamburger"
+      aria-label="Menu openen"
+      aria-expanded="false"
+      aria-controls="sidebar"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+        <line x1="3" y1="6"  x2="21" y2="6"  />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+
+    <a class="topbar__brand" href="#dashboard" aria-label="AI Plantoetser — naar dashboard">
+      <svg class="topbar__logo" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 2C11.582 2 8 5.582 8 10c0 6.627 8 18 8 18s8-11.373 8-18c0-4.418-3.582-8-8-8z"
+              fill="currentColor" opacity="0.15"/>
+        <path d="M16 2C11.582 2 8 5.582 8 10c0 6.627 8 18 8 18s8-11.373 8-18c0-4.418-3.582-8-8-8z"
+              stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+        <path d="M12.5 10l2.5 2.5 4.5-4.5"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <div class="topbar__title">AI Plantoetser</div>
+        <div class="topbar__subtitle">Planregeltoets omgevingsvergunningen</div>
+      </div>
+    </a>
+
+    <div class="topbar__spacer"></div>
+
+    <div class="topbar__actions">
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Schakel thema"
+        title="Licht/donker thema wisselen"
+      >
+        <!-- Icoon wordt dynamisch gevuld door app.js -->
+        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Body layout: sidebar + main -->
+  <div class="body-layout">
+
+    <!-- Sidebar overlay (mobiel) -->
+    <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar" aria-label="Hoofdnavigatie">
+      <div class="sidebar__nav">
+
+        <div class="sidebar__section-label">Toetsing</div>
+
+        <button class="nav-item" data-route="dashboard" onclick="navigate('#dashboard')"
+                aria-label="Dashboard">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+          </svg>
+          Dashboard
+        </button>
+
+        <button class="nav-item" data-route="zoeken" onclick="navigate('#zoeken')"
+                aria-label="Adres zoeken">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+          </svg>
+          Adres zoeken
+        </button>
+
+        <button class="nav-item" data-route="planregels" onclick="navigate('#planregels')"
+                aria-label="Planregels">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h4a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+          </svg>
+          Planregels
+        </button>
+
+        <button class="nav-item" data-route="maatvoeringen" onclick="navigate('#maatvoeringen')"
+                aria-label="Maatvoeringen">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" clip-rule="evenodd"/>
+          </svg>
+          Maatvoeringen
+        </button>
+
+        <div class="sidebar__section-label" style="margin-top:.75rem">Vergunning</div>
+
+        <button class="nav-item" data-route="activiteiten" onclick="navigate('#activiteiten')"
+                aria-label="Activiteiten kiezen">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+          </svg>
+          Activiteiten
+        </button>
+
+        <button class="nav-item" data-route="vereisten" onclick="navigate('#vereisten')"
+                aria-label="Indieningsvereisten">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          Vereisten
+        </button>
+
+        <button class="nav-item" data-route="advies" onclick="navigate('#advies')"
+                aria-label="Advies genereren">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"/>
+          </svg>
+          Advies
+        </button>
+
+      </div>
+
+      <!-- Actief perceel in sidebar -->
+      <div id="sidebar-perceel-info" style="display:none"></div>
+
+    </nav>
+
+    <!-- Main content -->
+    <main class="main-content" id="main-content" role="main" aria-live="polite">
+      <!-- Wordt dynamisch gevuld door de router -->
+      <div style="display:flex;align-items:center;justify-content:center;height:200px">
+        <div class="spinner"></div>
+      </div>
+    </main>
+
+  </div><!-- /body-layout -->
+
+</div><!-- /app -->
+
+<!-- Bootstrap -->
+<script type="module" src="./js/app.js"></script>
+
+</body>
+</html>
