@@ -66,7 +66,7 @@ export default {
     // ── 6. Stuur door naar doeladres ────────────────────────
     try {
       const proxyHeaders = {
-        'Accept':       'application/json',
+        'Accept':       'application/json, application/hal+json, */*',
         'Content-Type': 'application/json',
         'User-Agent':   'AI-Plantoetser/1.0',
       };
