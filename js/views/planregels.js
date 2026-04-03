@@ -76,26 +76,12 @@ export async function renderPlanregels(container) {
       }
     }
 
-    // Prioriteer lokale plannen boven provinciale/nationale plannen
-    const LOKALE_TYPES = [
-      'bestemmingsplan', 'beheersverordening', 'omgevingsplan',
-      'TAM-omgevingsplan', 'wijzigingsplan', 'uitwerkingsplan',
-      'inpassingsplan',
-    ];
-    const PROVINCIALE_TYPES = [
-      'omgevingsverordening', 'TAM-omgevingsverordening',
-      'provinciale verordening', 'amvb', 'regeling',
-    ];
-
-    const bestemmingsplannen = plannen.filter(p => LOKALE_TYPES.includes(p.type));
-    const overige = plannen
-      .filter(p => !LOKALE_TYPES.includes(p.type))
-      .sort((a, b) => {
-        // Provinciale plannen onderaan
-        const aProvinciaal = PROVINCIALE_TYPES.includes(a.type) ? 1 : 0;
-        const bProvinciaal = PROVINCIALE_TYPES.includes(b.type) ? 1 : 0;
-        return aProvinciaal - bProvinciaal;
-      });
+    // API retourneert al gefilterd: alleen vigerende lokale plannen (of fallback)
+    // Bepaal welke plannen vigerend zijn (vastgesteld/onherroepelijk)
+    const VIGERENDE_STATUSSEN = ['vastgesteld', 'onherroepelijk'];
+    const vigenrendePlannen = plannen.filter(p =>
+      VIGERENDE_STATUSSEN.includes((p.planstatusInfo?.planstatus ?? '').toLowerCase())
+    );
 
     if (!plannen.length) {
       wrap.innerHTML = `
@@ -105,7 +91,7 @@ export async function renderPlanregels(container) {
         </div>
         <div class="alert alert-warning">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-          <span>Geen plannen gevonden voor dit perceel. Controleer het adres of raadpleeg ruimtelijkeplannen.nl.</span>
+          <span>Geen vigerend bestemmingsplan of omgevingsplan gevonden voor dit perceel.</span>
         </div>
         <div class="btn-group" style="margin-top:1rem">
           <button class="btn btn-secondary" onclick="navigate('#zoeken')">Ander adres</button>
@@ -116,7 +102,7 @@ export async function renderPlanregels(container) {
       return;
     }
 
-    renderPlanSelector(wrap, perceel, bestemmingsplannen, overige, fromCache);
+    renderPlanSelector(wrap, perceel, vigenrendePlannen, plannen, fromCache);
 
   } catch (e) {
     if (e.message === 'WORKER_NOT_CONFIGURED') {
@@ -135,9 +121,20 @@ export async function renderPlanregels(container) {
   }
 }
 
-function renderPlanSelector(wrap, perceel, bestemmingsplannen, overige, fromCache) {
-  const allPlannen = [...bestemmingsplannen, ...overige];
-  let selectedPlanId = bestemmingsplannen[0]?.id ?? allPlannen[0]?.id;
+function planTypeBadge(type) {
+  const t = (type ?? '').toLowerCase();
+  if (t === 'omgevingsplan' || t === 'tam-omgevingsplan') return `<span class="badge badge-primary" style="font-size:.65rem">${type}</span>`;
+  if (t === 'bestemmingsplan') return `<span class="badge badge-success" style="font-size:.65rem">${type}</span>`;
+  return `<span class="badge badge-neutral" style="font-size:.65rem">${type}</span>`;
+}
+
+function renderPlanSelector(wrap, perceel, vigenrendePlannen, allePlannen, fromCache) {
+  // Het meest recente vigerende plan wordt automatisch geselecteerd
+  const hoofdPlan  = vigenrendePlannen[0] ?? allePlannen[0];
+  let selectedPlanId = hoofdPlan?.id;
+
+  // Overige vigerende plannen (niet het eerste)
+  const overigVigerend = vigenrendePlannen.slice(1);
 
   wrap.innerHTML = `
     <div class="page-header">
@@ -148,33 +145,35 @@ function renderPlanSelector(wrap, perceel, bestemmingsplannen, overige, fromCach
       </p>
     </div>
 
-    ${allPlannen.length > 1 ? `
+    ${hoofdPlan ? `
+      <div class="card" style="margin-bottom:1rem;border:2px solid var(--color-primary)">
+        <div class="card__header" style="background:var(--color-primary-subtle)">
+          <span class="card__title" style="color:var(--color-primary)">✓ Vigerend plan (automatisch geselecteerd)</span>
+        </div>
+        <div style="padding:1rem">
+          <div style="font-weight:600;font-size:var(--text-base);margin-bottom:.25rem">${hoofdPlan.naam}</div>
+          <div style="font-size:var(--text-sm);color:var(--color-text-muted);display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+            ${planTypeBadge(hoofdPlan.type)}
+            <span>${hoofdPlan.planstatusInfo?.planstatus ?? '—'}</span>
+            <span>·</span>
+            <span>${hoofdPlan.planstatusInfo?.datum ?? '—'}</span>
+          </div>
+        </div>
+      </div>
+    ` : ''}
+
+    ${overigVigerend.length > 0 ? `
       <div class="card" style="margin-bottom:1rem">
-        <div class="card__header"><span class="card__title">Selecteer plan</span></div>
+        <div class="card__header"><span class="card__title">Andere vigerende plannen op dit perceel</span></div>
         <div class="plan-list" id="plan-list">
-          ${bestemmingsplannen.length ? `<p style="font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.05em;padding:.25rem 0 .5rem">Lokale plannen</p>` : ''}
-          ${bestemmingsplannen.map((p, i) => `
-            <div class="plan-option ${i === 0 ? 'selected' : ''}" data-plan-id="${p.id}" tabindex="0" role="radio" aria-checked="${i === 0}">
-              <div class="plan-option__radio"></div>
-              <div class="plan-option__info">
-                <div class="plan-option__name">${p.naam}</div>
-                <div class="plan-option__meta">
-                  <span class="badge badge-success" style="font-size:.65rem">${p.type}</span>
-                  · ${p.planstatusInfo?.planstatus ?? '—'} · ${p.planstatusInfo?.datum ?? '—'}
-                  ${i === 0 ? ' · <strong>meest recent</strong>' : ''}
-                </div>
-              </div>
-            </div>
-          `).join('')}
-          ${overige.length ? `<p style="font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.05em;padding:.75rem 0 .5rem">Provinciale / overige plannen</p>` : ''}
-          ${overige.map((p) => `
+          ${overigVigerend.map(p => `
             <div class="plan-option" data-plan-id="${p.id}" tabindex="0" role="radio" aria-checked="false">
               <div class="plan-option__radio"></div>
               <div class="plan-option__info">
                 <div class="plan-option__name">${p.naam}</div>
-                <div class="plan-option__meta">
-                  <span class="badge badge-neutral" style="font-size:.65rem">${p.type}</span>
-                  · ${p.planstatusInfo?.planstatus ?? '—'} · ${p.planstatusInfo?.datum ?? '—'}
+                <div class="plan-option__meta" style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+                  ${planTypeBadge(p.type)}
+                  <span>${p.planstatusInfo?.planstatus ?? '—'} · ${p.planstatusInfo?.datum ?? '—'}</span>
                 </div>
               </div>
             </div>
@@ -188,7 +187,7 @@ function renderPlanSelector(wrap, perceel, bestemmingsplannen, overige, fromCach
     </div>
   `;
 
-  // Plan selector interactie
+  // Plan selector interactie voor overige vigerende plannen
   wrap.querySelectorAll('.plan-option').forEach(el => {
     const activate = () => {
       wrap.querySelectorAll('.plan-option').forEach(o => {
@@ -204,7 +203,7 @@ function renderPlanSelector(wrap, perceel, bestemmingsplannen, overige, fromCach
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') activate(); });
   });
 
-  // Laad eerste plan
+  // Laad het vigerende plan direct
   loadPlanDetail(wrap.querySelector('#plan-detail-wrap'), selectedPlanId, perceel);
 }
 
