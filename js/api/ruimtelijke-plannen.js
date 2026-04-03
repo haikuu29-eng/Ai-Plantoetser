@@ -42,7 +42,8 @@ const LOKALE_PLANTYPES = [
   'structuurvisie',
 ];
 
-// Plantypes die altijd worden uitgefilterd (provinciaal / nationaal)
+// Plantypes die altijd worden uitgefilterd
+// (provinciaal/nationaal, voorbereidend, niet-ruimtelijk)
 const UITGESLOTEN_PLANTYPES = [
   'omgevingsverordening',
   'tam-omgevingsverordening',
@@ -51,6 +52,11 @@ const UITGESLOTEN_PLANTYPES = [
   'regeling',
   'rijksstructuurvisie',
   'omgevingsvisie',
+  'voorbereidingsbesluit',
+  'gerechtelijke uitspraak',
+  'omgevingsvergunning',
+  'exploitatieplan',
+  'aanwijzingsbesluit',
 ];
 
 // Planstatussen die als vigerend (van kracht) worden beschouwd
