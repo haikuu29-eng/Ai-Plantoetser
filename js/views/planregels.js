@@ -76,13 +76,26 @@ export async function renderPlanregels(container) {
       }
     }
 
-    // Filter op bestemmingsplan (meest relevant voor vergunningtoets)
-    const bestemmingsplannen = plannen.filter(p =>
-      p.type === 'bestemmingsplan' || p.type === 'beheersverordening'
-    );
-    const overige = plannen.filter(p =>
-      p.type !== 'bestemmingsplan' && p.type !== 'beheersverordening'
-    );
+    // Prioriteer lokale plannen boven provinciale/nationale plannen
+    const LOKALE_TYPES = [
+      'bestemmingsplan', 'beheersverordening', 'omgevingsplan',
+      'TAM-omgevingsplan', 'wijzigingsplan', 'uitwerkingsplan',
+      'inpassingsplan',
+    ];
+    const PROVINCIALE_TYPES = [
+      'omgevingsverordening', 'TAM-omgevingsverordening',
+      'provinciale verordening', 'amvb', 'regeling',
+    ];
+
+    const bestemmingsplannen = plannen.filter(p => LOKALE_TYPES.includes(p.type));
+    const overige = plannen
+      .filter(p => !LOKALE_TYPES.includes(p.type))
+      .sort((a, b) => {
+        // Provinciale plannen onderaan
+        const aProvinciaal = PROVINCIALE_TYPES.includes(a.type) ? 1 : 0;
+        const bProvinciaal = PROVINCIALE_TYPES.includes(b.type) ? 1 : 0;
+        return aProvinciaal - bProvinciaal;
+      });
 
     if (!plannen.length) {
       wrap.innerHTML = `
@@ -139,18 +152,31 @@ function renderPlanSelector(wrap, perceel, bestemmingsplannen, overige, fromCach
       <div class="card" style="margin-bottom:1rem">
         <div class="card__header"><span class="card__title">Selecteer plan</span></div>
         <div class="plan-list" id="plan-list">
-          ${allPlannen.map((p, i) => `
+          ${bestemmingsplannen.length ? `<p style="font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.05em;padding:.25rem 0 .5rem">Lokale plannen</p>` : ''}
+          ${bestemmingsplannen.map((p, i) => `
             <div class="plan-option ${i === 0 ? 'selected' : ''}" data-plan-id="${p.id}" tabindex="0" role="radio" aria-checked="${i === 0}">
               <div class="plan-option__radio"></div>
               <div class="plan-option__info">
                 <div class="plan-option__name">${p.naam}</div>
                 <div class="plan-option__meta">
-                  ${p.planstatusInfo?.planstatus ?? '—'} · ${p.planstatusInfo?.datum ?? '—'}
+                  <span class="badge badge-success" style="font-size:.65rem">${p.type}</span>
+                  · ${p.planstatusInfo?.planstatus ?? '—'} · ${p.planstatusInfo?.datum ?? '—'}
                   ${i === 0 ? ' · <strong>meest recent</strong>' : ''}
                 </div>
               </div>
-              ${p.planstatusInfo?.planstatus === 'in voorbereiding'
-                ? '<span class="badge badge-warning">In voorbereiding</span>' : ''}
+            </div>
+          `).join('')}
+          ${overige.length ? `<p style="font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.05em;padding:.75rem 0 .5rem">Provinciale / overige plannen</p>` : ''}
+          ${overige.map((p) => `
+            <div class="plan-option" data-plan-id="${p.id}" tabindex="0" role="radio" aria-checked="false">
+              <div class="plan-option__radio"></div>
+              <div class="plan-option__info">
+                <div class="plan-option__name">${p.naam}</div>
+                <div class="plan-option__meta">
+                  <span class="badge badge-neutral" style="font-size:.65rem">${p.type}</span>
+                  · ${p.planstatusInfo?.planstatus ?? '—'} · ${p.planstatusInfo?.datum ?? '—'}
+                </div>
+              </div>
             </div>
           `).join('')}
         </div>
