@@ -84,6 +84,8 @@ export async function renderPlanregels(container) {
     );
 
     if (!plannen.length) {
+      // Bouw deeplink naar ruimtelijkeplannen.nl met adres vooringevuld
+      const rpUrl = `https://www.ruimtelijkeplannen.nl/?plansearch=${encodeURIComponent(perceel.weergavenaam)}`;
       wrap.innerHTML = `
         <div class="page-header">
           <h1 class="page-header__title">Planregels</h1>
@@ -91,13 +93,22 @@ export async function renderPlanregels(container) {
         </div>
         <div class="alert alert-warning">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-          <span>Geen vigerend bestemmingsplan of omgevingsplan gevonden voor dit perceel.</span>
+          <div>
+            <strong>Plan niet beschikbaar via de API</strong>
+            <p style="margin:.25rem 0 0">De gemeente heeft het bestemmingsplan voor dit perceel niet digitaal aangeleverd aan de Ruimtelijke Plannen API. Het plan bestaat wel — raadpleeg het via ruimtelijkeplannen.nl.</p>
+          </div>
         </div>
-        <div class="btn-group" style="margin-top:1rem">
-          <button class="btn btn-secondary" onclick="navigate('#zoeken')">Ander adres</button>
-          <a href="https://www.ruimtelijkeplannen.nl" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-            Ruimtelijkeplannen.nl ↗
-          </a>
+        <div class="card" style="margin-top:1rem">
+          <div class="card__header"><span class="card__title">Wat je nu kunt doen</span></div>
+          <div style="padding:1rem;display:flex;flex-direction:column;gap:.75rem">
+            <a href="${rpUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="text-align:center">
+              Bekijk plan op Ruimtelijkeplannen.nl ↗
+            </a>
+            <a href="https://omgevingswet.overheid.nl/viewer?address=${encodeURIComponent(perceel.weergavenaam)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="text-align:center">
+              Bekijk in het Omgevingsloket ↗
+            </a>
+            <button class="btn btn-ghost" onclick="navigate('#zoeken')">Ander adres zoeken</button>
+          </div>
         </div>`;
       return;
     }
