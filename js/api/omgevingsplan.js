@@ -4,7 +4,7 @@
 // ── Configureer hier jouw Worker-URL na deployment ──────────
 // Vul in na stap 1 van de README:
 //   bijv. 'https://ai-plantoetser.workers.dev'
-const WORKER_URL = '';
+const WORKER_URL = 'https://ai-plantoetser-proxy.haikuu29.workers.dev';
 
 // ─────────────────────────────────────────────────────────────
 
